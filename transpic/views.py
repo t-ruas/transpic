@@ -7,7 +7,7 @@ import flask
 import time
 import urllib2
 
-import app
+from transpic import app
 
 class StatusValues:
     new = 1
