@@ -1,6 +1,4 @@
 
-# http://flask.pocoo.org/docs/quickstart/
-
 import uuid
 import ConfigParser
 import os
@@ -8,6 +6,8 @@ import inspect
 import flask
 import time
 import urllib2
+
+import app
 
 class StatusValues:
     new = 1
@@ -20,14 +20,12 @@ class RunningProcess:
     status = StatusValues.new
     text = ""
 
-app = flask.Flask(__name__)
-
 # get root directory
 script_path = os.path.dirname(os.path.abspath(inspect.getframeinfo(inspect.currentframe()).filename)) + "\\"
 
 # read the configuration file
 config = ConfigParser.RawConfigParser()
-config.read(script_path + "pt.web.conf")
+config.read(script_path + "transpic.conf")
 
 process_status = {}
 
@@ -40,10 +38,10 @@ def main():
     else:
         # after upload, show a progress bar
         # generate an uuid to rename the image and act as an id for status handling
-        id = uuid.uuid5(uuid.NAMESPACE_DNS, "pt.com")
+        id = uuid.uuid5(uuid.NAMESPACE_DNS, "transpic.com")
         # save the image
         image = flask.request.files.get("image_name")
-        image.save(config.get("upload", "path") + str(id))
+        #image.save(config.get("upload", "path") + str(id))
         process_status[id] = RunningProcess()
         return flask.render_template("progress.html", id=id)
 
@@ -63,8 +61,3 @@ def status():
     else:
         # status update called from the different components
         pass
-    
-if __name__ == '__main__':
-    app.run(debug=True)
-    #app.run(host='0.0.0.0')
-    
