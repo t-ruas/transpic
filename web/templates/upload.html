@@ -1,0 +1,14 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title></title>
+        <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css" />
+        <meta charset="utf-8" />
+    </head>
+    <body>
+        <form id="form_image" action="{{ url_for('main') }}" method="post" enctype="multipart/form-data">
+            <input type="file" name="image_name"></input>
+            <a href="#" onclick="document.getElementById('form_image').submit(); return false;">Send</a>
+        </form>
+    </body>
+</html>
