@@ -3,5 +3,5 @@ import logging
 from subprocess import call
 
 def convert(self, pic):
-    # call(["ls", "-l"])
+    # call(["tesseract", "result", pic, "-psm 6"])
     pass

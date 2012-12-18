@@ -5,8 +5,6 @@ import json
 import logging
 import xml.dom.minidom
 
-from transpic.worker import config
-
 # Microsoft Translator V2 HTTP API implementation
 # http://msdn.microsoft.com/en-us/library/ff512419.aspx
 class MsTranslatorApi:
@@ -22,7 +20,7 @@ class MsTranslatorApi:
             "to": lang,
             "contentType": "text/plain"
             }
-        request_url = config.get("translation", "service_url") + "Translate?" + urllib.urlencode(params)
+        request_url = transpic.config.get("translation", "service_url") + "Translate?" + urllib.urlencode(params)
         logging.info("Translation requested [" + text + "] to [" + lang + "]")
         request = urllib2.Request(request_url)
         response_raw = self.execute_authenticated_request(request)
